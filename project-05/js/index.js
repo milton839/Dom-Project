@@ -9,6 +9,13 @@ const copyBtn = document.getElementById("copy-btn");
 
 const input = document.getElementById("input");
 
+input.addEventListener("keyup", function(e) {
+    const color = e.target.value;
+    if (color && isValidHex(color)) {
+        body.style.backgroundColor = color;
+    }
+})
+
 btn.addEventListener("click", function(){
     input.value = randomNumber();
     body.style.backgroundColor = randomNumber();
@@ -49,6 +56,13 @@ function generateToastMessage(msg){
     document.body.appendChild(div);
 }
 
+function isValidHex(color){
+    if ( color.length !==7 ) return false;
+    if ( color[0] !=='#' ) return false;
+    color = color.substring(1);
+    return /^[0-9A-Fa-f]{6}/i.test(color);
+}
+
 // step-3 collect all necessary references
 
 // step-4 handle the change button click event
@@ -60,3 +74,9 @@ function generateToastMessage(msg){
 // step-7 create a dynamic toast message
 
 // step-8 clear toast message
+
+// step-9 create isHexValid function
+
+// step-10 implement change handler on input field
+
+// step-11 prevent copying hex code if it is not valid
