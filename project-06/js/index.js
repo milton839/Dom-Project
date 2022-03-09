@@ -9,26 +9,33 @@ const copyBtn = document.getElementById("copy-btn");
 
 const input = document.getElementById("input");
 
+const error = document.getElementById("error");
+
 input.addEventListener("keyup", function(e) {
     const color = e.target.value;
+    input.value = color.toUpperCase();
     if (color && isValidHex(color)) {
-        body.style.backgroundColor = color;
+        error.innerHTML = "";
+        body.style.backgroundColor = `#${color}`;
+    }
+    else{
+        error.innerText = "Please provide a valid color";
     }
 })
 
 btn.addEventListener("click", function(){
-    input.value = randomNumber();
     body.style.backgroundColor = randomNumber();
+    input.value = randomNumber().substring(1).toUpperCase();
 })
 
 copyBtn.addEventListener("click", function(){
-    navigator.clipboard.writeText(input.value)
+    navigator.clipboard.writeText(`#${input.value}`)
     if (div !== null) {
         div.remove();
         div = null;
     }
     if (isValidHex(input.value)) {
-        generateToastMessage(`${input.value} copied`);
+        generateToastMessage(`#${input.value} copied`);
     }
     else{
         alert("Invalid Color Code");
@@ -62,9 +69,7 @@ function generateToastMessage(msg){
 }
 
 function isValidHex(color){
-    if ( color.length !==7 ) return false;
-    if ( color[0] !=='#' ) return false;
-    color = color.substring(1);
+    if ( color.length !== 6 ) return false;
     return /^[0-9A-Fa-f]{6}/i.test(color);
 }
 
