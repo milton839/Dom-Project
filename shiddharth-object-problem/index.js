@@ -204,4 +204,5 @@ Shiftsa.map((row, rowIndex) =>{
 })
 
 // console.log(Shiftsa)
-
+const num = 127
+console.log("hello", num.toString(16))
